@@ -1,6 +1,9 @@
 { config, lib, pkgs, ... }: 
 
 {
+  home.packages = with pkgs; [
+    kitty
+  ];
   programs.kitty = lib.mkForce {
     enable = true;
     settings = {
@@ -11,9 +14,6 @@
       font_family = "JetBrainsMono Nerd Font";
       font_size = "14.0";
       include = "~/.config/kitty/dank-theme.conf";
-      # extraConfig = ''
-      #   include ~/.config/kitty/dank-theme.conf
-      # '';
     };
   };
 }

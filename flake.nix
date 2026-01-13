@@ -1,17 +1,16 @@
 {
-  description = "Home Manager configuration of taran";
+  description = "NixOS system and Home Manager configuration of taran";
 
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs.
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell";
+      url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -19,29 +18,49 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    { nixpkgs, home-manager, niri, dms, ... }:
+    { self, nixpkgs, home-manager, niri, dms, zen-browser, ... }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
     in
       {
+        nixosConfigurations."braino" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./system/configuration.nix
+            ./system/hardware-configuration.nix
+          ];
+        };
       homeConfigurations."braino" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         modules = [
           ./modules/home.nix
-          ./modules/nvim.nix
-          ./modules/terminal.nix
+          ./modules/sh.nix
+          ./modules/terminal
+          ./modules/editors
+          ./modules/browsers
           niri.homeModules.niri
           dms.homeModules.dankMaterialShell.default
-          dms.homeModules.dankMaterialShell.niri
+          zen-browser.homeModules.beta
         ];
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
       };
     };
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -6,38 +6,61 @@
   home.username = "taran";
   home.homeDirectory = "/home/taran";
 
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 24;
+  };
+
+  gtk = {
+    enable = true;
+    iconTheme = {
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
+    };
+  };
+
   # DO NOT CHANGE
   # NOT EVEN IN THE SLIGHTEST AT ALL DO NOT CHANGE IT
   # IT IS, AND FOREVER WILL BE AT 25.11
   home.stateVersion = "25.11";
 
   home.packages = with pkgs; [
-    # general
+    # Wayland Stuff
     xwayland-satellite
-    mullvad-vpn
-    nextdns
-    cliphist
     wl-clipboard
-    obs-studio
-    mpv
-    ripgrep
-    feishin
-    quickemu
-    qutebrowser
+
+    # Web Browsers 
+    mullvad-browser
     librewolf-unwrapped
+
+    # File managers 
+    kdePackages.dolphin
+
+    # CLI Tools
+    croc
+    p7zip
+    ripgrep
     imv
-    lutris-free
     eza
     localsend
-    keepassxc
-    r2modman
+    aria2
+    jq
+    direnv
+    gh
+    zoxide
+    tmux
+    sesh
+    starship
+    fishPlugins.done
 
+    # C
     gcc
     gnumake
-    tree-sitter
-    gh
+    zathura
 
-    # programming related
+    # Language Servers 
     pyright
     ruff
     nil
@@ -47,12 +70,58 @@
     rust-analyzer
     lua-language-server
     nixd
+    ty
 
-    # terminal related
-    kitty
-    zoxide
-    tmux
-    starship
+    # Python
+    uv
+
+    # Neovim
+    tree-sitter
+
+    # Clipboard
+    cliphist
+
+    # Recording
+    obs-studio
+
+    # Multimedia
+    mpv
+    nicotine-plus
+    feishin
+    gophertube
+    kodi-wayland
+
+    # Gaming 
+    dolphin-emu
+    lutris-free
+    r2modman
+    prismlauncher
+
+    # Virtualisation
+    quickemu
+
+    # Downloaders
+    qbittorrent
+
+    # Office
+    onlyoffice-desktopeditors
+
+    # Security
+    bitwarden-cli
+    cryptomator
+
+    # Networking
+    websocat
+    mullvad-vpn
+    bruno
+    nextdns
+    scrcpy
+
+    # unfree
+    vivaldi
+    burpsuite
+    filebot
+    beeper
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -62,6 +131,12 @@
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
+
+    # ".tmux.conf".text = ''
+    #   set -g prefix C-s
+    #
+    # '';
+
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
@@ -94,15 +169,16 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  programs.fzf.enable = true;
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-            set fish_greeting
-            zoxide init fish | source
-            starship init fish | source
-    '';
+  xdg = {
+    # configFile."mimeapps.list".force = true;
+    mimeApps.enable = true;
+    mimeApps.defaultApplications = {
+      "application/pdf" = [ "zathura.desktop" ];
+      "video/x-matroska" = [ "mpv.desktop" ];
+    };
   };
+
+  programs.fzf.enable = true;
   programs.starship = {
     enable = true;
     settings = {
@@ -122,11 +198,5 @@
       autoUpdate = true;
     };
   };
-  programs.dankMaterialShell = {
-    enable = true;
-    # niri = {
-    #     # enableSpawn = true;
-    #     enableKeybinds = false;
-    # };
-  };
+  programs.dankMaterialShell.enable = true;
 }

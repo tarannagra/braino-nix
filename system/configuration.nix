@@ -22,6 +22,7 @@
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  services.gvfs.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   services.mullvad-vpn.enable = true;
   hardware = {

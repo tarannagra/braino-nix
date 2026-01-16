@@ -71,11 +71,14 @@ in
           installation_mode = "force_installed";
           updates_disabled = true;
         };
+        "{91aa3897-2634-4a8a-9092-279db23a7689}" = {
+          install_url = moz "zen-internet";
+          installation_mode = "force_installed";
+          updates_disabled = true;
+        };
       };
 
      profiles.default = {
-        id = 0;
-        # name = "${profile_name}";
         isDefault = true;
         settings = {
           # zen specific
@@ -83,6 +86,10 @@ in
           "zen.tabs.vertical.right-side" = true;
           "zen.view.compact.enable-at-startup" = false;
           "zen.theme.content-element-separation" = 0;
+        };
+        search = {
+          force = true;
+          default = "duckduckgo";
         };
       }; 
     };

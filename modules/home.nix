@@ -37,6 +37,7 @@
 
     # File managers 
     kdePackages.dolphin
+    thunar
 
     # CLI Tools
     croc
@@ -54,6 +55,7 @@
     sesh
     starship
     fishPlugins.done
+    fastfetch
 
     # C
     gcc
@@ -118,7 +120,6 @@
     scrcpy
 
     # unfree
-    vivaldi
     burpsuite
     filebot
     beeper

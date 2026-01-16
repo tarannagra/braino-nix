@@ -22,6 +22,8 @@
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  virtualisation.libvirtd.enable = true;
+
   services.gvfs.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   services.mullvad-vpn.enable = true;
@@ -92,13 +94,11 @@
   users.users.taran = {
     isNormalUser = true;
     description = "taran";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     shell = pkgs.fish;
-    # packages = with pkgs; [
-    # #  thunderbird
-    # ];
   };
 
+  programs.virt-manager.enable = true;
   programs.nix-ld.enable = true;
   programs.fish.enable = true;
   programs.hyprland = {
@@ -126,6 +126,7 @@
   environment.systemPackages = with pkgs; [
     neovim
     git
+    dnsmasq
     obsidian
     libgcc
     libnotify

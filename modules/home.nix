@@ -40,6 +40,7 @@
     thunar
 
     # CLI Tools
+    btop
     croc
     p7zip
     ripgrep

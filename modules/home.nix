@@ -192,7 +192,6 @@
       };
     };
   };
-  programs.yazi.enable = true;
   programs.fuzzel.enable = true;
   programs.vesktop = {
     enable = true;

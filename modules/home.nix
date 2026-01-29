@@ -71,6 +71,7 @@
     tinymist
     marksman
     rust-analyzer
+    clang-tools 
     lua-language-server
     nixd
     ty
@@ -112,6 +113,7 @@
     # Security
     bitwarden-cli
     cryptomator
+    ente-auth
 
     # Networking
     websocat

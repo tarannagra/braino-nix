@@ -22,8 +22,23 @@
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+    };
+  };
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+  };
 
+  services.nextdns = {
+    enable = true;
+    arguments = [ "-config" "3b1643" "-cache-size" "10MB" ];
+  };
   services.gvfs.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   services.mullvad-vpn.enable = true;
@@ -33,6 +48,9 @@
     nvidia.open = false;
     bluetooth.enable = true;
     nvidia.modesetting.enable = true;
+
+    # docker
+    nvidia-container-toolkit.enable = true;
   };
 
   i18n.defaultLocale = "en_GB.UTF-8";
@@ -94,7 +112,7 @@
   users.users.taran = {
     isNormalUser = true;
     description = "taran";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" ];
     shell = pkgs.fish;
   };
 
@@ -131,6 +149,7 @@
     libgcc
     libnotify
     quickshell
+    nextdns
   ];
 
   fonts.packages = with pkgs; [

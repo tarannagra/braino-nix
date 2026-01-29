@@ -56,6 +56,7 @@
           ./modules/sh.nix
           ./modules/terminal
           ./modules/editors
+          ./modules/file_managers
           ./modules/browsers
           niri.homeModules.niri
           dms.homeModules.dankMaterialShell.default

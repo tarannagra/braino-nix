@@ -95,3 +95,76 @@ in
     };
   };
 }
+
+# { pkgs, inputs, ... }: 
+#
+# {
+#   programs.zen-browser = {
+#     enable = true;
+#
+#     policies = let 
+#       mkLockedAttrs = builtins.mapAttrs (_: value: {
+#         Value = value;
+#         Status = "locked";
+#       });
+#     in {
+#       Preferences = mkLockedAttrs {
+#         # use about:config -> "browser.download" to manage download dir
+#         "browser.tabs.warnOnClose" = false;
+#       };
+#     };
+#
+#       # ExtensionSettings = let
+#       #   moz = short: "https://addons.mozilla.org/firefox/downloads/latest/${short}/latest.xpi";
+#       # in {
+#       #   "*".installation_mode = "blocked";
+#       #
+#       #   "uBlock0@raymondhill.net" = {
+#       #     install_url = moz "ublock-origin";
+#       #     installation_mode = "force_installed";
+#       #     updates_disabled = true;
+#       #   };
+#       #   "sponsorBlocker@ajay.app" = {
+#       #     install_url = moz "sponsorblock";
+#       #     installation_mode = "force_installed";
+#       #     updates_disabled = true;
+#       #   };
+#       #   "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+#       #     install_url = moz "bitwarden-password-manager";
+#       #     installation_mode = "force_installed";
+#       #     updates_disabled = true;
+#       #   };
+#       #
+#       #   "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
+#       #     install_url = moz "vimium-ff";
+#       #     installation_mode = "force_installed";
+#       #     updates_disabled = true;
+#       #   };
+#       #   "firefox@commafeed.com" = {
+#       #     install_url = moz "commafeed";
+#       #     installation_mode = "force_installed";
+#       #     updates_disabled = true;
+#       #   };
+#       #   "{91aa3897-2634-4a8a-9092-279db23a7689}" = {
+#       #     install_url = moz "zen-internet";
+#       #     installation_mode = "force_installed";
+#       #     updates_disabled = true;
+#       #   };
+#       # };
+#
+#      profiles.default = {
+#         isDefault = true;
+#         settings = {
+#           # zen specific
+#           "zen.welcome-screen.seen" = true;
+#           "zen.tabs.vertical.right-side" = true;
+#           "zen.view.compact.enable-at-startup" = false;
+#           "zen.theme.content-element-separation" = 0;
+#         };
+#         search = {
+#           force = true;
+#           default = "duckduckgo";
+#         };
+#       }; 
+#     };
+# }

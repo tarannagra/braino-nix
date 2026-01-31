@@ -36,7 +36,7 @@
   };
 
   outputs =
-    { self, nixpkgs, home-manager, niri, dms, zen-browser, ... }@inputs:
+    { self, nixpkgs, home-manager, niri, dms, zen-browser, nixcord, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -64,6 +64,7 @@
           ./modules/file_managers
           ./modules/browsers
           ./modules/messengers
+          nixcord.homeModules.nixcord
           niri.homeModules.niri
           dms.homeModules.dankMaterialShell.default
           zen-browser.homeModules.beta

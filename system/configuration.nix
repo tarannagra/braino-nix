@@ -142,7 +142,6 @@
 
   environment.systemPackages = with pkgs; [
     neovim
-    git
     dnsmasq
     obsidian
     libgcc

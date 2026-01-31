@@ -194,12 +194,12 @@
       };
     };
   };
-  programs.fuzzel.enable = true;
-  # programs.vesktop = {
-  #   enable = true;
-  #   vencord.settings = {
-  #     autoUpdate = true;
-  #   };
-  # };
+  programs.git = {
+    enable = true;
+    settings = {
+      user.name = "tarannagra";
+      user.email = "tarannagra@proton.me";
+    };
+  };
   programs.dankMaterialShell.enable = true;
 }

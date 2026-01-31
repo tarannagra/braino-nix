@@ -34,10 +34,12 @@
     enable = true;
     enableOnBoot = true;
   };
+
   services.nextdns = {
     enable = true;
     arguments = [ "-config" "3b1643" "-cache-size" "10MB" ];
   };
+  services.dnsmasq.enable = true;
   services.gvfs.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   services.mullvad-vpn.enable = true;
@@ -96,16 +98,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.taran = {
@@ -129,8 +122,8 @@
      capSysNice = true;
   };
   programs.steam = {
-	enable = true;
-	gamescopeSession.enable = true;
+    enable = true;
+    gamescopeSession.enable = true;
   };
 
   environment.sessionVariables = {
@@ -142,12 +135,10 @@
 
   environment.systemPackages = with pkgs; [
     neovim
-    dnsmasq
     obsidian
     libgcc
     libnotify
     quickshell
-    nextdns
   ];
 
   fonts.packages = with pkgs; [

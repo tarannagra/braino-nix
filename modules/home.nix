@@ -117,7 +117,6 @@
 
     # Networking
     websocat
-    mullvad-vpn
     bruno
     nextdns
     scrcpy
@@ -167,6 +166,7 @@
   #
   home.sessionVariables = {
     EDITOR = "nvim";
+    # QT_QPA_PLATFORM = "wayland";
   };
 
 
@@ -195,11 +195,11 @@
     };
   };
   programs.fuzzel.enable = true;
-  programs.vesktop = {
-    enable = true;
-    vencord.settings = {
-      autoUpdate = true;
-    };
-  };
+  # programs.vesktop = {
+  #   enable = true;
+  #   vencord.settings = {
+  #     autoUpdate = true;
+  #   };
+  # };
   programs.dankMaterialShell.enable = true;
 }

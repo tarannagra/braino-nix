@@ -34,7 +34,6 @@
     enable = true;
     enableOnBoot = true;
   };
-
   services.nextdns = {
     enable = true;
     arguments = [ "-config" "3b1643" "-cache-size" "10MB" ];

@@ -4,7 +4,7 @@
     [ 
       ./hardware-configuration.nix
     ];
-  
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -19,7 +19,7 @@
 
   # Timezone
   time.timeZone = "Europe/London";
-  
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   virtualisation.libvirtd = {
@@ -34,18 +34,16 @@
     enable = true;
     enableOnBoot = true;
   };
-
   services.nextdns = {
     enable = true;
     arguments = [ "-config" "3b1643" "-cache-size" "10MB" ];
   };
-  services.dnsmasq.enable = true;
   services.gvfs.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   services.mullvad-vpn.enable = true;
+  services.openssh.enable = true;
   hardware = {
     graphics.enable = true;
-    opengl.enable = true;
     nvidia.open = false;
     bluetooth.enable = true;
     nvidia.modesetting.enable = true;
@@ -98,7 +96,16 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
   };
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.taran = {
@@ -118,8 +125,8 @@
   };
   programs.niri.enable = true;
   programs.gamescope = {
-     enable = true;
-     capSysNice = true;
+    enable = true;
+    capSysNice = true;
   };
   programs.steam = {
     enable = true;
@@ -135,24 +142,26 @@
 
   environment.systemPackages = with pkgs; [
     neovim
+    dnsmasq
     obsidian
     libgcc
     libnotify
     quickshell
+    nextdns
   ];
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     lexend
   ];
-  
+
   xdg.portal = {
-	enable = true;
-	extraPortals = with pkgs; [ 
-		xdg-desktop-portal-hyprland 
-		xdg-desktop-portal-gnome 
-		xdg-desktop-portal-gtk 
-	];
+    enable = true;
+    extraPortals = with pkgs; [ 
+      xdg-desktop-portal-hyprland 
+      xdg-desktop-portal-gnome 
+      xdg-desktop-portal-gtk 
+    ];
   };
 
   system.stateVersion = "25.11";
@@ -162,7 +171,7 @@
     fsType = "ntfs-3g";
     options = [ "rw" "uid=1000" "gid=100" "dmask=022" "fmask=133" ];
   };
-  
+
   fileSystems."/mnt/media" = {
     device = "/dev/disk/by-uuid/01D65B840F4996E0";
     fsType = "ntfs-3g";

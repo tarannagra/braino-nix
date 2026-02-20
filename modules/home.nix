@@ -35,6 +35,9 @@
     mullvad-browser
     librewolf-unwrapped
 
+    # Messengers
+    element-desktop
+
     # File managers 
     kdePackages.dolphin
     thunar

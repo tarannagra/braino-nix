@@ -67,4 +67,8 @@ in
       )\""
     '';
   };
+
+  programs.sesh = {
+    enable = true;
+  };
 }

@@ -66,7 +66,7 @@
           ./modules/messengers
           nixcord.homeModules.nixcord
           niri.homeModules.niri
-          dms.homeModules.dankMaterialShell.default
+          dms.homeModules.dank-material-shell
           zen-browser.homeModules.beta
         ];
       };

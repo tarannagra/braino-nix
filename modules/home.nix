@@ -55,8 +55,6 @@
     direnv
     gh
     zoxide
-    tmux
-    sesh
     starship
     fishPlugins.done
     fastfetch
@@ -64,7 +62,6 @@
     # C
     gcc
     gnumake
-    zathura
 
     # Language Servers 
     pyright
@@ -90,6 +87,10 @@
 
     # Recording
     obs-studio
+
+    # Documents
+    zathura
+    readest
 
     # Multimedia
     mpv
@@ -185,7 +186,10 @@
     };
   };
 
-  programs.fzf.enable = true;
+  programs.fzf = {
+    enable = true;
+    tmux.enableShellIntegration = true;
+  };
   programs.starship = {
     enable = true;
     settings = {
@@ -204,5 +208,5 @@
       user.email = "tarannagra@proton.me";
     };
   };
-  programs.dankMaterialShell.enable = true;
+  programs.dank-material-shell.enable = true;
 }

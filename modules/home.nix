@@ -58,6 +58,7 @@
     starship
     fishPlugins.done
     fastfetch
+    vdirsyncer
 
     # C
     gcc

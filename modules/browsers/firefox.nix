@@ -80,6 +80,8 @@ in
       isDefault = true;
       settings = {
         "extensions.autoDisableScopes" = 0;
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        "svg.context-properties.content.enabled" = true;
 
         # Sidebar specific
         "sidebar.main.tools" = "history,{446900e4-71c2-419f-a6a7-df9c091e268b}";
@@ -104,6 +106,20 @@ in
             ];
             icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             definedAliases = ["@np"];
+          };
+
+          "Home Manager Search" = {
+            urls = [
+              {
+                template = "https://home-manager-options.extranix.com/";
+                params = [
+                  { name = "query"; value = "{searchTerms}"; }
+                  { name = "release"; value = "release-25.11"; }
+                ];
+              }
+            ];
+            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = ["@hms"];
           };
 
           "YouTube Search" = {

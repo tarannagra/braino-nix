@@ -76,8 +76,8 @@ in
           installation_mode = "force_installed";
           updates_disabled = true;
         };
-        "privacy-redirect@example.com" = {
-          install_url = moz "privacy-please";
+        "readeck@readeck.com" = {
+          install_url = moz "readeck";
           installation_mode = "force_installed";
           updates_disabled = true;
         };

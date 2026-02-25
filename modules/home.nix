@@ -122,7 +122,6 @@
 
     # Networking
     websocat
-    bruno
     nextdns
     scrcpy
 

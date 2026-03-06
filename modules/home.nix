@@ -97,7 +97,6 @@
     mpv
     nicotine-plus
     feishin
-    gophertube
     kodi-wayland
 
     # Gaming 
@@ -125,10 +124,14 @@
     nextdns
     scrcpy
 
+    # Crypto
+    monero-gui
+
     # unfree
     burpsuite
     filebot
     beeper
+    sublime3
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

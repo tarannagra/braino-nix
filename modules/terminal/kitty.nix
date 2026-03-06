@@ -11,8 +11,9 @@
       background_opacity = "0.9";
       copy_on_select = true;
       enable_audio_bell = false;
-      font_family = "JetBrainsMono Nerd Font";
-      font_size = "14.0";
+      font_family = "Maple Mono NF";
+      # font_family = "JetBrainsMono Nerd Font";
+      font_size = "13.0";
       include = "~/.config/kitty/dank-theme.conf";
     };
   };

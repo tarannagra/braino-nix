@@ -72,6 +72,11 @@ in
           installation_mode = "force_installed";
           updates_disabled = true;
         };
+        "@crw-extension-firefox" = {
+          install_url = moz "consumer-rights-wiki";
+          installation_mode = "force_installed";
+          updates_disabled = true;
+        };
       };
     };
     profiles."${profile_name}" = {

@@ -30,7 +30,7 @@
 
       # git specific
       ga = "git add";
-      gcom ="git commit -am";
+      gcom ="git commit -m";
       gpom = "git push origin main";
 
       # filebot

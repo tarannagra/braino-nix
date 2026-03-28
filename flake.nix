@@ -19,11 +19,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,10 +28,15 @@
       url = "github:FlameFlag/nixcord";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    voxtype = {
+      url = "github:peteonrails/voxtype";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    { self, nixpkgs, home-manager, niri, dms, zen-browser, nixcord, ... }@inputs:
+    { self, nixpkgs, home-manager, niri, dms, zen-browser, nixcord, voxtype, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -55,6 +55,7 @@
         };
       homeConfigurations."braino" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+        extraSpecialArgs = { inherit inputs; };
 
         modules = [
           ./modules/home.nix
@@ -67,6 +68,7 @@
           nixcord.homeModules.nixcord
           niri.homeModules.niri
           dms.homeModules.dank-material-shell
+          voxtype.homeManagerModules.default
           zen-browser.homeModules.beta
         ];
       };

@@ -1,52 +1,40 @@
 { config, pkgs, ... }: 
 
-let
-  bg = "#1f1f28";
-  fg = "#dcd7ba";
-  other_bg = "#C28E5C";
-
-  green = "#98bb6c";
-  blue = "#7fb4ca";
-  magenta = "#957fb8";
-  magentaActive = "#a78fd0";
-  grayBg = "#252531";
-  grayFg = "#727169";
-in
 {
   programs.tmux = {
     enable = true;
+    terminal = "tmux-256color";
     plugins = [
       {
-        plugin = pkgs.tmuxPlugins.dotbar;
-        extraConfig = ''
-          set -g @tmux-dotbar-position "top"
-        '';
+        plugin = pkgs.tmuxPlugins.resurrect;
       }
       {
-        plugin = pkgs.tmuxPlugins.resurrect;
+        plugin = pkgs.tmuxPlugins.minimal-tmux-status;
+        extraConfig = ''
+          set -g @minimal-tmux-use-arrow false
+          set -g @minimal-tmux-indicator-str "  braino  "
+          set -g @minimal-tmux-status top
+          set -g status-right-length 40
+          set -g status-left-length 40
+        '';
       }
     ];
     extraConfig = ''
       set -g prefix C-s
 
       set -g status on # off
-      set -g status-justify centre
-      set -g status-style "bg=${grayBg},fg=${fg}"
-      set -g status-left-length 40
-      set -g status-right-length 40
-      set -g status-interval 5
 
-      set -g status-left "#[bg=${green},fg=${bg},bold] #S #[bg=default,fg=${fg}]"
-      set -g status-right "#[bg=${magenta},bold] #{?client_prefix,#[fg=${bg}] PROMPT,#[fg=${bg}] BRAINO} "
+      set -g base-index 1
+      set -g pane-base-index 1
+      set-window-option -g pane-base-index 1
+      set-option -g renumber-windows on
 
-      set -g window-status-current-format "#[bg=${blue},fg=${bg},bold] #I:#W #[default]"
-      set -g window-status-format "#[fg=${grayFg}]#I:#W#[default]"
-
-      set -g pane-border-style "fg=${grayFg}"
-      set -g pane-active-border-style "fg=${blue}"
-
-      set -g message-style "bg=${grayBg},fg=${fg}"
-      set -g mode-style "bg=${magentaActive},fg=${bg},bold"
+      # alt+n -> move focused pane to index
+      bind -n M-1 select-window -t 1
+      bind -n M-2 select-window -t 2
+      bind -n M-3 select-window -t 3
+      bind -n M-4 select-window -t 4
+      bind -n M-5 select-window -t 5
 
       bind-key b set-option status
 

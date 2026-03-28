@@ -37,6 +37,7 @@
 
     # Messengers
     element-desktop
+    thunderbird
 
     # File managers 
     kdePackages.dolphin
@@ -95,8 +96,8 @@
 
     # Multimedia
     mpv
-    nicotine-plus
     feishin
+    grayjay
     kodi-wayland
 
     # Gaming 
@@ -123,11 +124,13 @@
     websocat
     nextdns
     scrcpy
+    postman
 
     # Crypto
     monero-gui
 
     # unfree
+    vivaldi
     burpsuite
     filebot
     beeper
@@ -181,11 +184,42 @@
   programs.home-manager.enable = true;
 
   xdg = {
-    # configFile."mimeapps.list".force = true;
+    configFile."yazi/flavors/dms-light.yazi/flavor.toml".text = ''
+      [flavor]
+      use = "light"
+
+      [which]
+      mask  = { bg = "#f9f9f9" }
+      cand  = { fg = "#1b1b1b", bold = true }
+      rest  = { fg = "#6c6969" }
+      desc  = { fg = "#232222" }
+      separator_style = { fg = "#ababab" }
+    '';
+
+    configFile."yazi/flavors/dms-dark.yazi/flavor.toml".text = ''
+      [flavor]
+      use = "dark"
+
+      [which]
+      mask  = { bg = "#131313" }
+      cand  = { fg = "#e2e2e2", bold = true }
+      rest  = { fg = "#767676" }
+      desc  = { fg = "#c6c6c6" }
+      separator_style = { fg = "#ababab" }
+    '';
+    # for the themes - has to be manual as of now:
+    # ya pkg add hankertrix/bluloco-yazi:bluloco-light
+    # ya pkg add dangooddd/kanagawa
+    configFile."yazi/theme.toml".text = ''
+    [flavor]
+    dark = "kanagawa"
+    light = "bluloco-light"
+    '';
     mimeApps.enable = true;
     mimeApps.defaultApplications = {
       "application/pdf" = [ "zathura.desktop" ];
       "video/x-matroska" = [ "mpv.desktop" ];
+      "x-scheme-handler/terminal" = [ "kitty.desktop" ];
     };
   };
 
@@ -212,4 +246,15 @@
     };
   };
   programs.dank-material-shell.enable = true;
+  programs.voxtype = {
+    enable = true;
+    package = inputs.voxtype.packages.${pkgs.stdenv.hostPlatform.system}.vulkan;
+    model.name = "base.en";
+    service.enable = true;
+    settings = {
+      hotkey.enabled = false;
+      # hotkey.key = "ALTGR";
+      whisper.language = "en";
+    };
+  };
 }

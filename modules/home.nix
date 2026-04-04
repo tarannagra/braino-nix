@@ -38,6 +38,8 @@
     # Messengers
     element-desktop
     thunderbird
+    teams-for-linux
+    gajim
 
     # File managers 
     kdePackages.dolphin

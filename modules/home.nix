@@ -52,7 +52,6 @@
     ripgrep
     imv
     eza
-    localsend
     aria2
     jq
     direnv

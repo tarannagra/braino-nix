@@ -119,6 +119,11 @@
     shell = pkgs.fish;
   };
 
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
+
   programs.virt-manager.enable = true;
   programs.nix-ld.enable = true;
   programs.fish.enable = true;

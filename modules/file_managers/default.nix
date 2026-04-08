@@ -1,6 +1,6 @@
 { ... }:
 {
   imports = [
-    ./pcmanfm.nix
+    ./nautilus.nix
   ];
 }

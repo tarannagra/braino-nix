@@ -1,5 +1,5 @@
 {
-  description = "NixOS system and Home Manager configuration of taran";
+  description = "braino-flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";

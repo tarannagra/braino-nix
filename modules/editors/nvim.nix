@@ -2,7 +2,9 @@
 
 {
   programs.neovim = {
-      enable = true;
+    enable = true;
+    withRuby = false; 
+    withPython3 = false;
   };
 }
 

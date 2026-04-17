@@ -12,6 +12,7 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.supportedFilesystems = [ "ntfs" ];
+	boot.kernelModules = [ "cifs" ]; # for samba
 
   # Networking
   networking.hostName = "braino";
@@ -20,7 +21,6 @@
   # Timezone
   time.timeZone = "Europe/London";
 
-  # nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     trusted-users = [ "root" "taran" "@wheel" ];
@@ -38,6 +38,7 @@
     enable = true;
     enableOnBoot = true;
   };
+	services.samba.enable = false;
   services.nextdns = {
     enable = true;
     arguments = [ "-config" "3b1643" "-cache-size" "10MB" ];
@@ -187,4 +188,16 @@
     fsType = "ntfs-3g";
     options = [ "rw" "uid=1000" "gid=100" "dmask=022" "fmask=133" ];
   };
+	fileSystems."/mnt/pi-music" = {
+			device = "//192.168.0.228/music";
+			fsType = "cifs";
+			options = [
+				"credentials=/etc/samba/credentials"
+				"uid=1000"
+				"gid=100"
+				"vers=3.0"
+				"nofail"
+				"x-systemd.automount"
+			];
+		};
 }
